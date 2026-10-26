@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University ERP - Upload Assignment</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon-sm">
+                <i class="ph-fill ph-hourglass-high"></i>
+            </div>
+            <span class="logo-text">University ERP</span>
+        </div>
+
+        <div class="sidebar-user-mini">
+            <img src="https://ui-avatars.com/api/?name=User&background=random" alt="Profile" class="user-avatar-md"
+                id="sidebar-avatar">
+            <div class="user-info-mini">
+                <span class="user-name-mini" id="sidebar-name">Loading...</span>
+                <span class="user-role-mini" id="sidebar-role">Faculty Member</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="faculty_dashboard.html" class="nav-item">
+                <i class="ph-fill ph-house"></i>
+                Home
+            </a>
+            <a href="faculty_profile.html" class="nav-item">
+                <i class="ph-fill ph-user"></i>
+                Profile
+            </a>
+            <a href="student_data.html" class="nav-item">
+                <i class="ph-fill ph-users"></i>
+                Students data
+            </a>
+            <a href="assignment_upload.html" class="nav-item active">
+                <i class="ph-fill ph-clipboard-text"></i>
+                Assignment
+            </a>
+            <a href="notice_upload.html" class="nav-item">
+                <i class="ph-fill ph-megaphone"></i>
+                Notice
+            </a>
+            <a href="exam_upload.html" class="nav-item">
+                <i class="ph-fill ph-calendar"></i>
+                Exam schedule
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="nav-item logout">
+                <i class="ph-bold ph-sign-out"></i>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-actions">
+                <button class="btn-icon">
+                    <i class="ph-fill ph-bell"></i>
+                </button>
+                <img src="https://ui-avatars.com/api/?name=User&background=random" alt="Profile" class="user-avatar"
+                    id="header-avatar">
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>Upload Assignment</h1>
+                <p>Upload new assignment materials for your students.</p>
+            </div>
+
+            <!-- Upload Zone -->
+            <div class="upload-container" id="uploadState" style="display: block;">
+                <div class="upload-zone">
+                    <div class="upload-icon-circle blue-light">
+                        <i class="ph-fill ph-file-arrow-up" style="color: var(--primary-color);"></i>
+                    </div>
+                    <h2>Upload New Assignment</h2>
+                    <p class="upload-hint">Drag & drop your file here or click to browse. Supports: .pdf, .docx, .zip
+                    </p>
+                    <button class="btn-primary-lg">
+                        <i class="ph-bold ph-upload-simple"></i>
+                        Upload Assignment
+                    </button>
+                    <input type="file" id="fileInput" hidden>
+                </div>
+            </div>
+
+            <!-- Preview State (Initially Hidden) -->
+            <div class="upload-container" id="previewState"
+                style="display: none; flex-direction: column; align-items: center; text-align: center;">
+                <h2 id="fileNameDisplay" style="margin-bottom: 1rem; color: var(--text-main);">Current Assignment</h2>
+                <div
+                    style="margin-bottom: 1.5rem; padding: 2rem; border-radius: 8px; border: 1px solid #E5E7EB; background: #F9FAFB;">
+                    <i class="ph-fill ph-file-text" style="font-size: 48px; color: var(--text-light);"></i>
+                    <p id="fileInfo" style="margin-top: 1rem; font-weight: 500; color: var(--text-main);">Assignment.pdf
+                    </p>
+                </div>
+
+                <button class="btn-primary-lg" id="deleteBtn" style="background-color: #EF4444; width: auto;">
+                    <i class="ph-bold ph-trash"></i>
+                    Delete Assignment
+                </button>
+            </div>
+
+            <!-- Back Button -->
+            <div class="action-footer">
+                <a href="faculty_dashboard.html" class="btn-back">
+                    <i class="ph-bold ph-arrow-left"></i>
+                    Back
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="dashboard.js"></script>
+    <script>
+        // DOM Elements
+        const uploadState = document.getElementById('uploadState');
+        const previewState = document.getElementById('previewState');
+        const uploadZone = document.querySelector('.upload-zone');
+        const fileInput = document.getElementById('fileInput');
+        const uploadBtn = document.querySelector('.btn-primary-lg');
+        const fileInfo = document.getElementById('fileInfo');
+        const deleteBtn = document.getElementById('deleteBtn');
+
+        // Sidebar & Header Dynamic Info
+        document.addEventListener('DOMContentLoaded', () => {
+            const name = localStorage.getItem('facultyName') || 'Guest Faculty';
+            const department = localStorage.getItem('facultyDepartment') || 'Faculty Member';
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random`;
+
+            // Update Name and Role/Department
+            const sidebarName = document.getElementById('sidebar-name');
+            const sidebarRole = document.getElementById('sidebar-role');
+            if (sidebarName) sidebarName.textContent = name;
+            if (sidebarRole) sidebarRole.textContent = department;
+
+            // Update Avatars
+            const sidebarAvatar = document.getElementById('sidebar-avatar');
+            const headerAvatar = document.getElementById('header-avatar');
+            if (sidebarAvatar) sidebarAvatar.src = avatarUrl;
+            if (headerAvatar) headerAvatar.src = avatarUrl;
+        });
+
+        // Check for existing file on load
+        const storedFile = localStorage.getItem('assignmentFile');
+        const storedFileName = localStorage.getItem('assignmentFileName');
+        if (storedFile) {
+            showPreview(storedFileName || 'Assignment');
+        }
+
+        // --- Event Listeners ---
+
+        // Delete Button
+        deleteBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete this assignment? Students will no longer see it.')) {
+                localStorage.removeItem('assignmentFile');
+                localStorage.removeItem('assignmentFileName'); // Also remove name
+                resetToUpload();
+            }
+        });
+
+        // Upload Button Click
+        uploadBtn.addEventListener('click', () => fileInput.click());
+
+        // File Input Change
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                handleFile(fileInput.files[0]);
+            }
+        });
+
+        // Drag & Drop
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('drag-over');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('drag-over');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('drag-over');
+            if (e.dataTransfer.files.length) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        // --- Functions ---
+
+        function handleFile(file) {
+            // Allow more types for assignments
+            // const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png']; 
+            // Simplified check:
+            if (file.size > 5 * 1024 * 1024) { // 5MB limit check
+                alert('File is too large. Please upload under 5MB.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const base64String = e.target.result;
+                try {
+                    localStorage.setItem('assignmentFile', base64String);
+                    localStorage.setItem('assignmentFileName', file.name); // Store name to display
+                    showPreview(file.name);
+                    alert('Assignment uploaded successfully!');
+                } catch (err) {
+                    console.error(err);
+                    alert('File too large to save in demo storage. Please try a smaller file.');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function showPreview(name) {
+            fileInfo.textContent = name;
+            uploadState.style.display = 'none';
+            previewState.style.display = 'flex';
+        }
+
+        function resetToUpload() {
+            localStorage.removeItem('assignmentFile');
+            localStorage.removeItem('assignmentFileName');
+            fileInput.value = '';
+            uploadState.style.display = 'block';
+            previewState.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University ERP - Hostel Warden Profile</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon-sm" style="color: #2563EB;">
+                <i class="ph-fill ph-triangle"></i>
+            </div>
+            <span class="logo-text">Hostel ERP</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="hostel_dashboard.html" class="nav-item">
+                <i class="ph-fill ph-house"></i>
+                Home
+            </a>
+            <a href="hostel_profile.html" class="nav-item active">
+                <i class="ph-fill ph-user"></i>
+                Profile
+            </a>
+            <a href="#" class="nav-item">
+                <i class="ph-fill ph-users"></i>
+                Students data
+            </a>
+            <a href="hostel_information.html" class="nav-item">
+                <i class="ph-fill ph-bed"></i>
+                Hostel allocation
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="nav-item logout">
+                <i class="ph-bold ph-sign-out"></i>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <!-- Empty or Breadcrumb -->
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon">
+                    <div class="notification-badge"></div>
+                    <i class="ph-fill ph-bell"></i>
+                </button>
+                <img src="https://ui-avatars.com/api/?name=Warden&background=FDBA74" alt="Profile" class="user-avatar">
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>Warden Profile View</h1>
+                <p>View administrative profile details.</p>
+            </div>
+
+            <div class="profile-view-card">
+                <div class="profile-view-layout">
+                    <!-- Left Column: Photo -->
+                    <div class="profile-photo-section">
+                        <h3>Profile Photo</h3>
+                        <!-- Using a slightly different placeholder or style if needed, but reusing standard -->
+                        <div class="photo-placeholder-lg"
+                            style="background-color: #FFF7ED; color: #F97316; border-color: #FED7AA;">
+                            <!-- Orange theme for Warden/Hostel -->
+                            <i class="ph-fill ph-user-gear"></i>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Details Grid -->
+                    <div class="profile-details-section">
+                        <div class="detail-row">
+                            <div class="detail-group">
+                                <label>Full Name</label>
+                                <div class="detail-value">Sarah Jenkins</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row">
+                            <div class="detail-group">
+                                <label>Email Address</label>
+                                <div class="detail-value">sarah.jenkins@university.edu</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row-2-col">
+                            <div class="detail-group">
+                                <label>Role</label>
+                                <div class="detail-value">Senior Warden</div>
+                            </div>
+                            <div class="detail-group">
+                                <label>Assigned Block</label>
+                                <div class="detail-value">Block A (Women's Hostel)</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row-2-col">
+                            <div class="detail-group">
+                                <label>Employee ID</label>
+                                <div class="detail-value">EMP-HOS-042</div>
+                            </div>
+                            <div class="detail-group">
+                                <label>Office Contact</label>
+                                <div class="detail-value">+1 (555) 999-8888</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer-simple border-top">
+                    <a href="hostel_dashboard.html" class="btn-back">
+                        <i class="ph-bold ph-arrow-left"></i>
+                        Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

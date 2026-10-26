@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal ERP - Create Account</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Create New User Account</h2>
+                <p>Fill in the details below to create a new account in the system.</p>
+            </div>
+
+            <form id="registerForm">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name"
+                        class="input-light">
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address"
+                        class="input-light">
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" class="input-light">
+                </div>
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose a username"
+                        class="input-light">
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Enter your password"
+                            class="input-light">
+                        <button type="button" class="password-toggle" data-target="password">
+                            <i class="ph ph-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirm-password" name="confirm-password"
+                            placeholder="Confirm your password" class="input-light">
+                        <button type="button" class="password-toggle" data-target="confirm-password">
+                            <i class="ph ph-eye-slash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Role Selection -->
+                <div class="form-group">
+                    <label for="role">Select User Role</label>
+                    <div class="input-wrapper">
+                        <select id="role" name="role" class="input-light role-select">
+                            <option value="student">Student</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                        <i class="ph ph-caret-down select-arrow"></i>
+                    </div>
+                </div>
+
+                <!-- Student Specific Fields (Hidden by default) -->
+                <div id="student-fields" class="hidden">
+                    <!-- Course -->
+                    <div class="form-group">
+                        <label for="course">Course</label>
+                        <input type="text" id="course" name="course" placeholder="Enter your course (e.g. BCA, B.Tech)"
+                            class="input-light">
+                    </div>
+
+                    <!-- Academic Year -->
+                    <div class="form-group">
+                        <label for="academic-year">Academic Year</label>
+                        <input type="text" id="academic-year" name="academic-year"
+                            placeholder="Enter academic year (e.g. 2023-2024)" class="input-light">
+                    </div>
+                </div>
+
+                <!-- Faculty Specific Fields (Hidden by default) -->
+                <div id="faculty-fields" class="hidden">
+                    <!-- Department -->
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input type="text" id="department" name="department" placeholder="Enter your department"
+                            class="input-light">
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" placeholder="Enter your office address"
+                            class="input-light">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary btn-dark">Register</button>
+
+                <!-- Back Button -->
+                <a href="index.html" class="btn-secondary">Back to Login</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Supabase JS Client -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script src="register.js"></script>
+</body>
+
+</html>

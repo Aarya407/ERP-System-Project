@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal ERP - Assignments</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon-sm">
+                <i class="ph-bold ph-graduation-cap"></i>
+            </div>
+            <span class="logo-text">IICMR ERP Portal</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="student_dashboard.html" class="nav-item">
+                <i class="ph-fill ph-house"></i>
+                Home
+            </a>
+            <a href="student_profile.html" class="nav-item">
+                <i class="ph-fill ph-user"></i>
+                Profile
+            </a>
+            <a href="exam_timetable.html" class="nav-item">
+                <i class="ph-fill ph-file-text"></i>
+                Exam
+            </a>
+            <a href="hostel_application.html" class="nav-item">
+                <i class="ph-fill ph-house-line"></i>
+                Hostel
+            </a>
+            <a href="fee_overview.html" class="nav-item">
+                <i class="ph-fill ph-receipt"></i>
+                Fee
+            </a>
+            <a href="student_assignments.html" class="nav-item active">
+                <i class="ph-fill ph-clipboard-text"></i>
+                Assignment
+            </a>
+            <a href="student_notices.html" class="nav-item">
+                <i class="ph-fill ph-megaphone"></i>
+                Notice
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="nav-item logout">
+                <i class="ph-bold ph-sign-out"></i>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper" style="padding-top: 2rem;">
+
+            <!-- Page Card -->
+            <div class="card-full-height">
+                <div class="card-header-simple border-bottom">
+                    <h1>Assignments</h1>
+                </div>
+
+                <div class="empty-state-container">
+                    <div class="empty-icon-circle blue-light">
+                        <i class="ph-fill ph-clipboard-text" style="color: var(--primary-color);"></i>
+                    </div>
+                    <h2>No Assignments</h2>
+                    <p>There are no pending assignments to display. Check back later for new tasks.</p>
+                </div>
+
+                <!-- Footer with Back Button -->
+                <div class="card-footer-simple border-top">
+                    <a href="student_dashboard.html" class="btn-back">
+                        <i class="ph-bold ph-arrow-left"></i>
+                        Back
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script src="dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedAssignment = localStorage.getItem('assignmentFile');
+            const storedName = localStorage.getItem('assignmentFileName') || 'Assignment.pdf';
+            const container = document.querySelector('.card-full-height');
+
+            if (storedAssignment && container) {
+                // Remove empty state
+                const emptyState = container.querySelector('.empty-state-container');
+                if (emptyState) emptyState.style.display = 'none';
+
+                // Create Content Container
+                const contentContainer = document.createElement('div');
+                contentContainer.style.padding = '2rem';
+                contentContainer.style.textAlign = 'center';
+                contentContainer.style.flex = '1';
+                contentContainer.style.display = 'flex';
+                contentContainer.style.flexDirection = 'column';
+                contentContainer.style.alignItems = 'center';
+                contentContainer.style.justifyContent = 'center';
+
+                // Create File Icon/Preview Area
+                const filePreview = document.createElement('div');
+                filePreview.style.padding = '3rem';
+                filePreview.style.borderRadius = '12px';
+                filePreview.style.background = '#F9FAFB'; // Light gray
+                filePreview.style.border = '2px dashed #E5E7EB';
+                filePreview.style.marginBottom = '2rem';
+                filePreview.style.display = 'flex';
+                filePreview.style.flexDirection = 'column';
+                filePreview.style.alignItems = 'center';
+                filePreview.style.gap = '1rem';
+                filePreview.style.minWidth = '300px';
+
+                const icon = document.createElement('i');
+                icon.className = 'ph-fill ph-file-text';
+                icon.style.fontSize = '64px';
+                icon.style.color = 'var(--primary-color)';
+                filePreview.appendChild(icon);
+
+                const nameLabel = document.createElement('h3');
+                nameLabel.textContent = storedName;
+                nameLabel.style.color = 'var(--text-main)';
+                nameLabel.style.fontWeight = '500';
+                filePreview.appendChild(nameLabel);
+
+                contentContainer.appendChild(filePreview);
+
+                // Download Button
+                const downloadBtn = document.createElement('a');
+                downloadBtn.href = storedAssignment;
+                downloadBtn.download = storedName;
+                downloadBtn.className = 'btn-primary-lg';
+                downloadBtn.style.textDecoration = 'none';
+                downloadBtn.style.display = 'inline-flex';
+                downloadBtn.style.alignItems = 'center';
+                downloadBtn.style.gap = '0.75rem';
+                downloadBtn.innerHTML = '<i class="ph-bold ph-download-simple"></i> Download Assignment';
+
+                contentContainer.appendChild(downloadBtn);
+
+                // Insert after header
+                const header = container.querySelector('.card-header-simple');
+                header.insertAdjacentElement('afterend', contentContainer);
+            }
+        });
+    </script>
+</body>
+
+</html>

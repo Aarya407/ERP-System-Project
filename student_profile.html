@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal ERP - Student Profile</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon-sm">
+                <i class="ph-bold ph-graduation-cap"></i>
+            </div>
+            <span class="logo-text">IICMR ERP Portal</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="student_dashboard.html" class="nav-item">
+                <i class="ph-fill ph-house"></i>
+                Home
+            </a>
+            <a href="student_profile.html" class="nav-item active">
+                <i class="ph-fill ph-user"></i>
+                Profile
+            </a>
+            <a href="exam_timetable.html" class="nav-item">
+                <i class="ph-fill ph-file-text"></i>
+                Exam
+            </a>
+            <a href="hostel_application.html" class="nav-item">
+                <i class="ph-fill ph-house-line"></i>
+                Hostel
+            </a>
+            <a href="fee_overview.html" class="nav-item">
+                <i class="ph-fill ph-receipt"></i>
+                Fee
+            </a>
+            <a href="student_assignments.html" class="nav-item">
+                <i class="ph-fill ph-clipboard-text"></i>
+                Assignment
+            </a>
+            <a href="student_notices.html" class="nav-item">
+                <i class="ph-fill ph-megaphone"></i>
+                Notice
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="nav-item logout">
+                <i class="ph-bold ph-sign-out"></i>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="user-profile">
+                <!-- Similar to student dashboard but simplified if needed, or keeping consistent -->
+                <div class="user-info">
+                    <span class="user-name">Olivia Jensen</span>
+                    <span class="user-email">olivia.jensen@university.iicmr</span>
+                </div>
+                <img src="https://ui-avatars.com/api/?name=Olivia+Jensen&background=0D8ABC&color=fff" alt="Profile"
+                    class="user-avatar">
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>Student Profile View</h1>
+                <p>View the student's information below.</p>
+            </div>
+
+            <div class="profile-view-card">
+                <div class="profile-view-layout">
+                    <!-- Left Column: Photo -->
+                    <div class="profile-photo-section">
+                        <h3>Student Photo</h3>
+                        <div class="photo-placeholder-lg">
+                            <i class="ph-fill ph-image"></i>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Details Grid -->
+                    <div class="profile-details-section">
+                        <div class="detail-row">
+                            <div class="detail-group">
+                                <label>Full Name</label>
+                                <div class="detail-value" id="profile-fullname">Loading...</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row">
+                            <div class="detail-group">
+                                <label>Email Address</label>
+                                <div class="detail-value" id="profile-email">Loading...</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row-2-col">
+                            <div class="detail-group">
+                                <label>Course</label>
+                                <div class="detail-value" id="profile-course">Loading...</div>
+                            </div>
+                            <div class="detail-group">
+                                <label>Academic Year</label>
+                                <div class="detail-value" id="profile-academic-year">Loading...</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row-2-col">
+                            <div class="detail-group">
+                                <label>Student ID</label>
+                                <div class="detail-value">CS2024-001</div>
+                            </div>
+                            <div class="detail-group">
+                                <label>Phone Number</label>
+                                <div class="detail-value" id="profile-phone">Loading...</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row">
+                            <div class="detail-group">
+                                <label>Password</label>
+                                <div class="detail-value">••••••••</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer-simple border-top">
+                    <a href="student_dashboard.html" class="btn-back">
+                        <i class="ph-bold ph-arrow-left"></i>
+                        Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve stored student info
+            const storedName = localStorage.getItem('studentName');
+            const storedEmail = localStorage.getItem('studentEmail');
+            const storedPhone = localStorage.getItem('studentPhone');
+            const storedCourse = localStorage.getItem('studentCourse');
+            const storedAcademicYear = localStorage.getItem('studentAcademicYear');
+
+            if (storedName) {
+                // Update Header
+                const headerName = document.querySelector('.user-name');
+                const headerAvatar = document.querySelector('.user-avatar');
+                if (headerName) headerName.textContent = storedName;
+                if (headerAvatar) headerAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(storedName)}&background=0D8ABC&color=fff`;
+
+                // Update Profile Fields
+                const nameField = document.getElementById('profile-fullname');
+                if (nameField) nameField.textContent = storedName;
+            }
+
+            if (storedEmail) {
+                // Update Header
+                const headerEmail = document.querySelector('.user-email');
+                if (headerEmail) headerEmail.textContent = storedEmail;
+
+                // Update Profile Fields
+                const emailField = document.getElementById('profile-email');
+                if (emailField) emailField.textContent = storedEmail;
+            }
+
+            if (storedPhone) {
+                const phoneField = document.getElementById('profile-phone');
+                if (phoneField) phoneField.textContent = storedPhone;
+            } else {
+                const phoneField = document.getElementById('profile-phone');
+                if (phoneField) phoneField.textContent = 'Not provided';
+            }
+
+            if (storedCourse) {
+                const courseField = document.getElementById('profile-course');
+                if (courseField) courseField.textContent = storedCourse;
+            } else {
+                const courseField = document.getElementById('profile-course');
+                if (courseField) courseField.textContent = 'Not provided';
+            }
+
+            if (storedAcademicYear) {
+                const yearField = document.getElementById('profile-academic-year');
+                if (yearField) yearField.textContent = storedAcademicYear;
+            } else {
+                const yearField = document.getElementById('profile-academic-year');
+                if (yearField) yearField.textContent = 'Not provided';
+            }
+        });
+    </script>
+</body>
+
+</html>

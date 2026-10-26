@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IICMR ERP Portal - Notices</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon-sm">
+                <i class="ph-bold ph-graduation-cap"></i>
+            </div>
+            <span class="logo-text">IICMR ERP Portal </span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="student_dashboard.html" class="nav-item">
+                <i class="ph-fill ph-house"></i>
+                Home
+            </a>
+            <a href="student_profile.html" class="nav-item">
+                <i class="ph-fill ph-user"></i>
+                Profile
+            </a>
+            <a href="exam_timetable.html" class="nav-item">
+                <i class="ph-fill ph-file-text"></i>
+                Exam
+            </a>
+            <a href="hostel_application.html" class="nav-item">
+                <i class="ph-fill ph-house-line"></i>
+                Hostel
+            </a>
+            <a href="fee_overview.html" class="nav-item">
+                <i class="ph-fill ph-receipt"></i>
+                Fee
+            </a>
+            <a href="student_assignments.html" class="nav-item">
+                <i class="ph-fill ph-clipboard-text"></i>
+                Assignment
+            </a>
+            <a href="student_notices.html" class="nav-item active">
+                <i class="ph-fill ph-megaphone"></i>
+                Notice
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="nav-item logout">
+                <i class="ph-bold ph-sign-out"></i>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper" style="padding-top: 2rem;">
+
+            <!-- Page Card -->
+            <div class="card-full-height">
+                <div class="card-header-simple border-bottom">
+                    <h1>Notices</h1>
+                </div>
+
+                <div class="empty-state-container">
+                    <div class="empty-icon-circle">
+                        <!-- Using a generic 'files' or 'tray' icon as closest match to 'picture' placeholder -->
+                        <i class="ph-fill ph-tray"></i>
+                    </div>
+                    <h2>No New Notices</h2>
+                    <p>Select a notice from the list to view its details, or check back later for new updates.</p>
+                </div>
+
+                <!-- Floating Back Button (or fixed at bottom of card as per image) -->
+                <div class="card-footer-simple border-top">
+                    <a href="student_dashboard.html" class="btn-back">
+                        <i class="ph-bold ph-arrow-left"></i>
+                        Back
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script src="dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedNotice = localStorage.getItem('noticeFile');
+            const container = document.querySelector('.card-full-height');
+
+            if (storedNotice && container) {
+                // Remove empty state
+                const emptyState = container.querySelector('.empty-state-container');
+                if (emptyState) emptyState.style.display = 'none';
+
+                // Create Image Container
+                const imageContainer = document.createElement('div');
+                imageContainer.style.padding = '2rem';
+                imageContainer.style.textAlign = 'center';
+                imageContainer.style.overflow = 'auto'; // Handle large images
+                imageContainer.style.flex = '1';
+
+                // Create Image
+                const img = document.createElement('img');
+                img.src = storedNotice;
+                img.alt = 'Important Notice';
+                img.style.maxWidth = '100%';
+                img.style.height = 'auto';
+                img.style.borderRadius = '8px';
+                img.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+
+                imageContainer.appendChild(img);
+
+                // Insert after header
+                const header = container.querySelector('.card-header-simple');
+                header.insertAdjacentElement('afterend', imageContainer);
+
+                // Add Download Button to Footer if not already there
+                const footer = container.querySelector('.card-footer-simple');
+                if (footer) {
+                    const downloadBtn = document.createElement('a');
+                    downloadBtn.href = storedNotice;
+                    downloadBtn.download = 'Notice.png';
+                    downloadBtn.className = 'btn-primary-sm';
+                    downloadBtn.style.textDecoration = 'none';
+                    downloadBtn.style.display = 'inline-flex';
+                    downloadBtn.style.alignItems = 'center';
+                    downloadBtn.style.gap = '0.5rem';
+                    downloadBtn.style.marginLeft = 'auto'; // Push to right
+                    downloadBtn.innerHTML = '<i class="ph-bold ph-download-simple"></i> Download';
+
+                    // Make footer flex
+                    footer.style.display = 'flex';
+                    footer.style.alignItems = 'center';
+                    footer.appendChild(downloadBtn);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal ERP - Student Dashboard</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon-sm">
+                <i class="ph-bold ph-graduation-cap"></i>
+            </div>
+            <span class="logo-text">IICMR ERP Portal</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="student_dashboard.html" class="nav-item active">
+                <i class="ph-fill ph-house"></i>
+                Home
+            </a>
+            <a href="student_profile.html" class="nav-item">
+                <i class="ph-fill ph-user"></i>
+                Profile
+            </a>
+            <a href="exam_timetable.html" class="nav-item">
+                <i class="ph-fill ph-file-text"></i>
+                Exam
+            </a>
+            <a href="hostel_application.html" class="nav-item">
+                <i class="ph-fill ph-house-line"></i>
+                Hostel
+            </a>
+            <a href="fee_overview.html" class="nav-item">
+                <i class="ph-fill ph-receipt"></i>
+                Fee
+            </a>
+            <a href="student_assignments.html" class="nav-item">
+                <i class="ph-fill ph-clipboard-text"></i>
+                Assignment
+            </a>
+            <a href="student_notices.html" class="nav-item">
+                <i class="ph-fill ph-megaphone"></i>
+                Notice
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="nav-item logout">
+                <i class="ph-bold ph-sign-out"></i>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="user-profile">
+                <div class="user-info">
+                    <span class="user-name" id="userName"></span>
+                    <span class="user-email" id="userEmail"></span>
+                </div>
+                <img src="https://ui-avatars.com/api/?name=Student+Name&background=0D8ABC&color=fff" alt="Profile"
+                    class="user-avatar">
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1>Welcome back, Student!</h1>
+                <p>Here's a summary of your academic information.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Attendance</h3>
+                    <div class="stat-value">92%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Current GPA</h3>
+                    <div class="stat-value">3.8</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Courses Enrolled</h3>
+                    <div class="stat-value">5</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Fees Due</h3>
+                    <div class="stat-value red">0</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <button class="btn-action primary" onclick="window.location.href='fee_overview.html'">Pay Fees
+                        Online</button>
+                    <button class="btn-action secondary">Download Receipt</button>
+                </div>
+            </div>
+
+            <!-- Info Grid (Exams & Notices) -->
+            <div class="info-grid">
+                <!-- Upcoming Exam -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h2>Upcoming Exam</h2>
+                    </div>
+                    <div class="exam-list">
+                        <div class="exam-item">
+                            <div class="exam-details">
+                                <span class="exam-title">Advanced Algorithms</span>
+                                <span class="exam-code">CS-401</span>
+                            </div>
+                            <div class="exam-time">
+                                <span class="date">24 Oct, 2026</span>
+                                <span class="time">10:00 AM</span>
+                            </div>
+                        </div>
+                        <div class="exam-item">
+                            <div class="exam-details">
+                                <span class="exam-title">Database Systems</span>
+                                <span class="exam-code">DB-302</span>
+                            </div>
+                            <div class="exam-time">
+                                <span class="date">28 Oct, 2026</span>
+                                <span class="time">02:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="exam_timetable.html" class="card-link">View Full Schedule</a>
+                </div>
+
+                <!-- Recent Notices -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h2>Recent Notices</h2>
+                    </div>
+                    <div class="notice-list">
+                        <div class="notice-item">
+                            <div class="notice-content">
+                                <span class="notice-title">Mid-term Exam Schedule Update</span>
+                                <p>A minor change in the CS department exam timings.</p>
+                            </div>
+                            <span class="notice-date">2 days ago</span>
+                        </div>
+                        <div class="notice-item">
+                            <div class="notice-content">
+                                <span class="notice-title">Annual Sports Day Registration</span>
+                                <p>Registrations are now open for all events.</p>
+                            </div>
+                            <span class="notice-date">5 days ago</span>
+                        </div>
+                    </div>
+                    <a href="student_notices.html" class="card-link">View All Notices</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

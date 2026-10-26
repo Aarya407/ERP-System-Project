@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IICMR ERP Portal- Login</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Side: Branding -->
+        <div class="left-panel">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="ph-bold ph-stack"></i>
+                </div>
+                <span class="logo-text">IICMR ERP Portal</span>
+            </div>
+
+            <div class="hero-content">
+                <h1>Welcome to the ERP Portal</h1>
+                <p>Access your academic resources, manage courses, and stay connected with the campus community.</p>
+            </div>
+
+            <div class="footer-copyright">
+                &copy; 2025 Bit & Bytes. All Rights Reserved.
+            </div>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="right-panel">
+            <div class="login-box">
+                <div class="login-header">
+                    <h2>Sign In to Your Account</h2>
+                    <p>Enter your credentials to access your dashboard.</p>
+                </div>
+
+                <form id="loginForm">
+                    <!-- Role Selection -->
+                    <div class="form-group">
+                        <label for="role">Select your role</label>
+                        <div class="input-wrapper">
+                            <i class="ph ph-user input-icon"></i>
+                            <select id="role" name="role">
+                                <option value="student">Student</option>
+                                <option value="faculty">Faculty</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                            <i class="ph ph-caret-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <!-- Username -->
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <i class="ph ph-user input-icon"></i>
+                            <input type="text" id="username" name="username" placeholder="Enter your username or email">
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="ph ph-lock-key input-icon"></i>
+                            <input type="password" id="password" name="password" placeholder="Enter your password">
+                            <button type="button" class="password-toggle" id="togglePassword">
+                                <i class="ph ph-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-primary">Sign In</button>
+
+                    <!-- Footer Links -->
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="register.html">Create New User</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase JS Client -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
